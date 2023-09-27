@@ -21,12 +21,12 @@ class TestViewSet(ModelViewSet):
     allowed_methods: List[str] = ["GET"]
 
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet:
         """method that returns query set"""
         return TestModel.objects.all()
 
 
-    def list(self, request, *args, **kwargs):
+    def list(self, request, *args, **kwargs) -> Response:
         """get method for all table entries"""
 
         queryset: QuerySet = self.get_queryset()
