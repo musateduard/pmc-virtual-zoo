@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+
+        // import settings
+        "target": "ES6",
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "esModuleInterop": true,
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "isolatedModules": true,
+        "skipLibCheck": true,
+        "resolveJsonModule": true,
+        "lib": [
+            "DOM",
+            "DOM.Iterable",
+            "ESNext"
+        ],
+
+        // syntax settings
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "noFallthroughCasesInSwitch": true,
+        "noEmit": true,
+        "jsx": "react-jsx"
+    },
+    "include": [
+        "src"
+    ]
+}
