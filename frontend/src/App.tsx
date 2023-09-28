@@ -1,4 +1,6 @@
+import { AddCircle } from '@mui/icons-material';
 import './App.css';
+import { Box, Button, Container, IconButton } from '@mui/material';
 import React, { Fragment, ReactElement, useEffect, useState } from 'react';
 
 
@@ -39,7 +41,29 @@ export default function App(): ReactElement {
 
             <h3>animals</h3>
 
-            {animals.map((item: any, index: number): ReactElement => {return <p key={index}>{item.name}</p>})}
+            <Container
+                component="main">
+
+                {animals.map((item: any, index: number): ReactElement => {
+
+                    const element: ReactElement =
+
+                        <Box
+                            key={index}>
+
+                            {item.name}
+                        </Box>
+
+                    return element;})}
+
+            </Container>
+
+            <Button
+                variant='contained'
+                endIcon={<AddCircle />}>
+
+                add animal
+            </Button>
 
         </Fragment>
 
