@@ -6,20 +6,20 @@ from .models import Test
 from .models import Animal
 
 # types
-from typing import Dict, List
+from typing import Dict
 
 
 class TestSerializer(ModelSerializer):
 
     class Meta:
         model: type = Test
-        fields: List[str] = ["test_char", "test_int", "test_bool"]
-        extra_kwargs = {}
+        fields: str = "__all__"
+        extra_kwargs: Dict[str, str] = {}
 
 
 class AnimalSerializer(ModelSerializer):
 
     class Meta:
         model: type = Animal
-        fields: List[str] = ["name", "weight", "superpower", "extinct_since"]
+        fields: str = "__all__"
         extra_kwargs: Dict[str, str] = {}
