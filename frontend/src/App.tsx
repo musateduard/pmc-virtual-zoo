@@ -2,6 +2,7 @@ import { AddCircle } from '@mui/icons-material';
 import './App.css';
 import { Box, Button, Container, IconButton } from '@mui/material';
 import React, { Fragment, ReactElement, useEffect, useState } from 'react';
+import { Animal } from './types';
 
 
 export default function App(): ReactElement {
@@ -16,6 +17,30 @@ export default function App(): ReactElement {
             const data = await response.json();
 
             setAnimals(data);}
+
+        catch (error) {
+            console.log(error);}
+
+        return;}
+
+
+    const sendAnimal: Function = async function(animalData: Animal): Promise<void> {
+
+        try {
+            console.log(JSON.stringify(animalData));
+
+            // todo: fix post request returning response 415
+            const response: Response = await fetch(
+
+                // fetch url
+                "http://localhost:8000/animals/", {
+
+                // request data
+                method: "POST",
+                mode: "cors",
+                body: JSON.stringify(animalData)});
+
+            console.log(response.status);}
 
         catch (error) {
             console.log(error);}
@@ -60,7 +85,12 @@ export default function App(): ReactElement {
 
             <Button
                 variant='contained'
-                endIcon={<AddCircle />}>
+                endIcon={<AddCircle />}
+                onClick={(event): void => sendAnimal({
+                    name: "dog",
+                    weight: 55,
+                    superpower: "speed",
+                    extinct_since: "not extinct"})}>
 
                 add animal
             </Button>
