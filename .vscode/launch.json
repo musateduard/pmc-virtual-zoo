@@ -11,5 +11,17 @@
             "url": "http://localhost:3000",
             "webRoot": "${workspaceFolder}/frontend"  // path to react project
         },
+        {
+            "name": "Python: Django",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/backend/manage.py",
+            "args": [
+                "runserver",
+                "0.0.0.0:8000"
+            ],
+            "django": true,
+            "justMyCode": false
+        },
     ]
 }
