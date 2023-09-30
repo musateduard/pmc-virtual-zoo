@@ -7,14 +7,16 @@ import { Animal } from './types';
 
 export default function App(): ReactElement {
 
-    const [animals, setAnimals] = useState([]);
+    const [animals, setAnimals] = useState<Animal[]>([]);
 
 
     const getAnimals: Function = async function(controller: AbortController): Promise<void> {
 
         try {
             const response: Response = await fetch("http://localhost:8000/animals/", {signal: controller.signal});
-            const data = await response.json();
+            const data: Animal[] = await response.json();
+
+            console.log(data);
 
             setAnimals(data);}
 
@@ -29,7 +31,6 @@ export default function App(): ReactElement {
         try {
             console.log(JSON.stringify(animalData));
 
-            // todo: fix post request returning response 415
             const response: Response = await fetch(
 
                 // fetch url
@@ -38,6 +39,7 @@ export default function App(): ReactElement {
                 // request data
                 method: "POST",
                 mode: "cors",
+                headers: {"content-type": "application/json"},
                 body: JSON.stringify(animalData)});
 
             console.log(response.status);}
