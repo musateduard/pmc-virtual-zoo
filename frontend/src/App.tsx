@@ -1,8 +1,10 @@
-import { AddCircle } from '@mui/icons-material';
+import { AddCircle, Padding } from '@mui/icons-material';
 import './App.css';
-import { Box, Button, Container, IconButton } from '@mui/material';
+import { Box, Button, Card, Container, IconButton } from '@mui/material';
 import React, { Fragment, ReactElement, useEffect, useState } from 'react';
 import { Animal } from './types';
+import AnimalForm from './components/AnimalForm';
+import AnimalItem from './components/AnimalItem';
 
 
 export default function App(): ReactElement {
@@ -26,30 +28,6 @@ export default function App(): ReactElement {
         return;}
 
 
-    const sendAnimal: Function = async function(animalData: Animal): Promise<void> {
-
-        try {
-            console.log(JSON.stringify(animalData));
-
-            const response: Response = await fetch(
-
-                // fetch url
-                "http://localhost:8000/animals/", {
-
-                // request data
-                method: "POST",
-                mode: "cors",
-                headers: {"content-type": "application/json"},
-                body: JSON.stringify(animalData)});
-
-            console.log(response.status);}
-
-        catch (error) {
-            console.log(error);}
-
-        return;}
-
-
     useEffect(
 
         // effect handler
@@ -64,40 +42,26 @@ export default function App(): ReactElement {
 
     const html =
 
-        <Fragment>
-
-            <h3>animals</h3>
-
             <Container
-                component="main">
+                component="main"
+                sx={{
+                    paddingX: 1}}>
 
-                {animals.map((item: any, index: number): ReactElement => {
+                <Card
+                    component="section"
+                    sx={{
+                        marginY: 2,
+                        padding: 2}}>
 
-                    const element: ReactElement =
+                    <h1 style={{margin: 0}}>animals</h1>
 
-                        <Box
-                            key={index}>
+                    {animals.map((item: any, index: number): ReactElement => {return <AnimalItem key={index} animalData={item} />})}
 
-                            {item.name}
-                        </Box>
+                </Card>
 
-                    return element;})}
+                {/* add animal form */}
+                <AnimalForm />
 
             </Container>
-
-            <Button
-                variant='contained'
-                endIcon={<AddCircle />}
-                onClick={(event): void => sendAnimal({
-                    name: "dog",
-                    weight: 55,
-                    superpower: "speed",
-                    extinct_since: "not extinct"})}>
-
-                add animal
-            </Button>
-
-        </Fragment>
-
 
     return html;}
