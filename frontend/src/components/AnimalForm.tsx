@@ -1,10 +1,10 @@
 import { Button, Card, Container, TextField } from "@mui/material";
-import { Fragment, ReactElement, useState } from "react";
+import { Dispatch, Fragment, ReactElement, SetStateAction, useState } from "react";
 import { Animal } from "../types";
 import { AddCircle } from "@mui/icons-material";
 
 
-export default function AnimalForm(): ReactElement {
+export default function AnimalForm(props: {setRender: Dispatch<SetStateAction<boolean>>}): ReactElement {
 
     const [animal, setAnimal] = useState<Animal>({});
 
@@ -26,7 +26,11 @@ export default function AnimalForm(): ReactElement {
                 body: JSON.stringify(animalData)});
 
             if (response.status >= 200 && response.status < 300) {
-                console.log("animal successfully added");}
+
+                // todo: clear form data after submitting
+                // todo: display hint after submitting form
+                console.log("animal successfully added");
+                setAnimal({});}
 
             else {
                 console.log(response.status);}}
@@ -34,7 +38,7 @@ export default function AnimalForm(): ReactElement {
         catch (error) {
             console.log(error);}
 
-        window.location.reload();
+        props.setRender(render => !render);
 
         return;}
 

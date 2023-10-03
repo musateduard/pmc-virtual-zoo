@@ -10,6 +10,7 @@ import AnimalItem from './components/AnimalItem';
 export default function App(): ReactElement {
 
     const [animals, setAnimals] = useState<Animal[]>([]);
+    const [render, setRender] = useState<boolean>(false);
 
 
     const getAnimals: Function = async function(controller: AbortController): Promise<void> {
@@ -35,7 +36,7 @@ export default function App(): ReactElement {
             return (): void => {controller.abort()};},
 
         // dependency array
-        []);
+        [render]);
 
 
     const html: ReactElement =
@@ -53,16 +54,18 @@ export default function App(): ReactElement {
 
                     <h1 style={{margin: 0}}>Animals</h1>
 
-                    <List>
+                    <List
+                        component="ul">
+
                         {animals.length > 0 ?
-                            animals.map((item: any, index: number): ReactElement => {return <AnimalItem key={index} animalData={item} />}) :
+                            animals.map((item: any, index: number): ReactElement => <AnimalItem key={index} animalData={item} setRender={setRender} />) :
                             <h2>no animals</h2>}
                     </List>
 
                 </Card>
 
                 {/* add animal form */}
-                <AnimalForm />
+                <AnimalForm setRender={setRender} />
 
             </Container>
 

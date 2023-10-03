@@ -1,10 +1,10 @@
 import { Box, Button } from "@mui/material";
-import { ReactElement } from "react";
+import { Dispatch, ReactElement, SetStateAction, useEffect, useState } from "react";
 import { Animal } from "../types";
 import { Delete } from "@mui/icons-material";
 
 
-export default function AnimalItem(props: {animalData: Animal}): ReactElement {
+export default function AnimalItem(props: {animalData: Animal, setRender: Dispatch<SetStateAction<boolean>>}): ReactElement {
 
 
     const deleteAnimal: Function = async function(animalData: Animal): Promise<void> {
@@ -32,7 +32,7 @@ export default function AnimalItem(props: {animalData: Animal}): ReactElement {
         catch (error) {
             console.log(error);}
 
-        window.location.reload();
+        props.setRender(render => !render);
 
         return;}
 
