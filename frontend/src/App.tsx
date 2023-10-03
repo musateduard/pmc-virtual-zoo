@@ -18,8 +18,6 @@ export default function App(): ReactElement {
             const response: Response = await fetch("http://localhost:8000/animals/", {signal: controller.signal});
             const data: Animal[] = await response.json();
 
-            console.log(data);
-
             setAnimals(data);}
 
         catch (error) {
@@ -34,13 +32,13 @@ export default function App(): ReactElement {
         () => {
             const controller: AbortController = new AbortController();
             getAnimals(controller);
-            return () => {controller.abort()};},
+            return (): void => {controller.abort()};},
 
         // dependency array
         []);
 
 
-    const html =
+    const html: ReactElement =
 
             <Container
                 component="main"
@@ -56,7 +54,9 @@ export default function App(): ReactElement {
                     <h1 style={{margin: 0}}>Animals</h1>
 
                     <List>
-                        {animals.map((item: any, index: number): ReactElement => {return <AnimalItem key={index} animalData={item} />})}
+                        {animals.length > 0 ?
+                            animals.map((item: any, index: number): ReactElement => {return <AnimalItem key={index} animalData={item} />}) :
+                            <h2>no animals</h2>}
                     </List>
 
                 </Card>
