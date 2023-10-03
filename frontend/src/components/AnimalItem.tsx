@@ -10,13 +10,13 @@ export default function AnimalItem(props: {animalData: Animal}): ReactElement {
 
         <Box
             key={22}
-            component="div"
+            component="li"
             sx={{
                 display: "flex",
                 justifyContent: "space-between",
                 marginY: 1}}>
 
-            <h4
+            <h2
                 style={{
                     marginBlock: 0,
                     display: "flex",
@@ -24,7 +24,7 @@ export default function AnimalItem(props: {animalData: Animal}): ReactElement {
                     justifyContent: "center"}}>
 
                 {props.animalData.name}
-            </h4>
+            </h2>
 
             <Button
                 variant='contained'
