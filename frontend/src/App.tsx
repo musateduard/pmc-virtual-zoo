@@ -1,6 +1,6 @@
 import { AddCircle, Padding } from '@mui/icons-material';
 import './App.css';
-import { Box, Button, Card, Container, IconButton } from '@mui/material';
+import { Box, Button, Card, Container, IconButton, List } from '@mui/material';
 import React, { Fragment, ReactElement, useEffect, useState } from 'react';
 import { Animal } from './types';
 import AnimalForm from './components/AnimalForm';
@@ -53,9 +53,11 @@ export default function App(): ReactElement {
                         marginY: 2,
                         padding: 2}}>
 
-                    <h1 style={{margin: 0}}>animals</h1>
+                    <h1 style={{margin: 0}}>Animals</h1>
 
-                    {animals.map((item: any, index: number): ReactElement => {return <AnimalItem key={index} animalData={item} />})}
+                    <List>
+                        {animals.map((item: any, index: number): ReactElement => {return <AnimalItem key={index} animalData={item} />})}
+                    </List>
 
                 </Card>
 
