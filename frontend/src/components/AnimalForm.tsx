@@ -8,9 +8,8 @@ export default function AnimalForm(): ReactElement {
 
     const [animal, setAnimal] = useState<Animal>({});
 
-    console.log(animal);
 
-    const sendAnimal: Function = async function(animalData: Animal): Promise<void> {
+    const createAnimal: Function = async function(animalData: Animal): Promise<void> {
 
         try {
             console.log(JSON.stringify(animalData));
@@ -26,7 +25,11 @@ export default function AnimalForm(): ReactElement {
                 headers: {"content-type": "application/json"},
                 body: JSON.stringify(animalData)});
 
-            console.log(response.status);}
+            if (response.status >= 200 && response.status < 300) {
+                console.log("animal successfully added");}
+
+            else {
+                console.log(response.status);}}
 
         catch (error) {
             console.log(error);}
@@ -34,6 +37,7 @@ export default function AnimalForm(): ReactElement {
         window.location.reload();
 
         return;}
+
 
     const html: ReactElement =
 
@@ -82,7 +86,7 @@ export default function AnimalForm(): ReactElement {
             <Button
                 variant='contained'
                 endIcon={<AddCircle />}
-                onClick={(event): void => sendAnimal(animal)}>
+                onClick={(event): void => createAnimal(animal)}>
 
                 add animal
             </Button>
