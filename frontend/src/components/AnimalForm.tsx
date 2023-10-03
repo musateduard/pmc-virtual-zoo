@@ -51,7 +51,7 @@ export default function AnimalForm(props: {setRender: Dispatch<SetStateAction<bo
                 marginY: 2,
                 padding: 2}}>
 
-            <p>enter animal</p>
+            <h1>Enter Animal</h1>
 
             <TextField
                 sx={{
