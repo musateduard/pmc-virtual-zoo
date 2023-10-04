@@ -1,10 +1,9 @@
-import { AddCircle, Padding } from '@mui/icons-material';
 import './App.css';
-import { Box, Button, Card, Container, IconButton, List } from '@mui/material';
-import React, { Fragment, ReactElement, useEffect, useState } from 'react';
+import { Container } from '@mui/material';
+import { ReactElement, useEffect, useState } from 'react';
 import { Animal } from './types';
 import AnimalForm from './components/AnimalForm';
-import AnimalItem from './components/AnimalItem';
+import AnimalList from './components/AnimalList';
 
 
 export default function App(): ReactElement {
@@ -46,23 +45,8 @@ export default function App(): ReactElement {
                 sx={{
                     paddingX: 1}}>
 
-                <Card
-                    component="section"
-                    sx={{
-                        marginY: 2,
-                        padding: 2}}>
-
-                    <h1 style={{margin: 0}}>Animals</h1>
-
-                    <List
-                        component="ul">
-
-                        {animals.length > 0 ?
-                            animals.map((item: any, index: number): ReactElement => <AnimalItem key={index} animalData={item} setRender={setRender} />) :
-                            <h2>no animals</h2>}
-                    </List>
-
-                </Card>
+                {/* animal list component */}
+                <AnimalList animals={animals} setRender={setRender} />
 
                 {/* add animal form */}
                 <AnimalForm setRender={setRender} />
