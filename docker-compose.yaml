@@ -2,4 +2,12 @@ version: "3.8"
 
 services:
 
-volumes:
+  backend:
+    build: ./backend
+    image: pmc-backend
+    container_name: pmc-backend
+    init: true
+    ports:
+      - 8000:8000
+
+# volumes:
