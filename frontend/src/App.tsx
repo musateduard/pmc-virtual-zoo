@@ -45,6 +45,8 @@ export default function App(): ReactElement {
                 sx={{
                     paddingX: 1}}>
 
+                <h1>Virtual Zoo</h1>
+
                 {/* animal list component */}
                 <AnimalList animals={animals} setRender={setRender} />
 

@@ -1,4 +1,4 @@
-import { Button, Card, Container, IconButton, Snackbar, TextField } from "@mui/material";
+import { Button, Card, IconButton, Snackbar, TextField } from "@mui/material";
 import { Dispatch, Fragment, ReactElement, SetStateAction, useState } from "react";
 import { Animal } from "../types";
 import { AddCircle } from "@mui/icons-material";
@@ -70,7 +70,8 @@ export default function AnimalForm(props: {setRender: Dispatch<SetStateAction<bo
                 flexDirection: "column",
                 alignItems: "flex-start"}}>
 
-            <h1>Enter Animal</h1>
+            <h2>Animal Form</h2>
+            <p>Enter Animal Data:</p>
 
             <TextField
                 sx={{

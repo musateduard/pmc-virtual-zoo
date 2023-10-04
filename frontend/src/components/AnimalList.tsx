@@ -17,7 +17,7 @@ export default function AnimalList(props: {animals: Animal[], setRender: Dispatc
                 marginY: 2,
                 padding: 2}}>
 
-            <h1 style={{margin: 0}}>Animals</h1>
+            <h2 style={{margin: 0}}>Animal List</h2>
 
             <List
                 component="ul">
