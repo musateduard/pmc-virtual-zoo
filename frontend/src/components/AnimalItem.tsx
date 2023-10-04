@@ -37,7 +37,7 @@ export default function AnimalItem(props: {animalData: Animal, setRender: Dispat
         return;}
 
 
-    const html: ReactElement =
+    const Html: ReactElement =
 
         <Box
             key={22}
@@ -68,4 +68,4 @@ export default function AnimalItem(props: {animalData: Animal, setRender: Dispat
 
         </Box>
 
-    return html;}
+    return Html;}

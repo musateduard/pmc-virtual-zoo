@@ -1,17 +1,17 @@
 import './index.css';
 
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React, { ReactElement } from 'react';
+import ReactDOM, { Root } from 'react-dom/client';
 
 import App from './App';
 
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+const root: Root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
-const html =
+const Html: ReactElement =
 
     <React.StrictMode>
         <App />
     </React.StrictMode>
 
-root.render(html);
+root.render(Html);

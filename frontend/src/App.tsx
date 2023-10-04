@@ -39,7 +39,7 @@ export default function App(): ReactElement {
         [render]);
 
 
-    const html: ReactElement =
+    const Html: ReactElement =
 
             <Container
                 component="main"
@@ -69,4 +69,4 @@ export default function App(): ReactElement {
 
             </Container>
 
-    return html;}
+    return Html;}
