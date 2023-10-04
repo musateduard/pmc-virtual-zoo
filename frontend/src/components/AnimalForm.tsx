@@ -1,12 +1,14 @@
-import { Button, Card, Container, TextField } from "@mui/material";
+import { Button, Card, Container, IconButton, Snackbar, TextField } from "@mui/material";
 import { Dispatch, Fragment, ReactElement, SetStateAction, useState } from "react";
 import { Animal } from "../types";
 import { AddCircle } from "@mui/icons-material";
+import CloseIcon from "@mui/icons-material/Close";
 
 
 export default function AnimalForm(props: {setRender: Dispatch<SetStateAction<boolean>>}): ReactElement {
 
     const [animal, setAnimal] = useState<Animal>({});
+    const [feedback, setFeedback] = useState<boolean>(false);
 
 
     const createAnimal: Function = async function(animalData: Animal): Promise<void> {
@@ -28,9 +30,9 @@ export default function AnimalForm(props: {setRender: Dispatch<SetStateAction<bo
             if (response.status >= 200 && response.status < 300) {
 
                 // todo: clear form data after submitting
-                // todo: display hint after submitting form
                 console.log("animal successfully added");
-                setAnimal({});}
+                setAnimal({});
+                setFeedback(true);}
 
             else {
                 console.log(response.status);}}
@@ -43,13 +45,30 @@ export default function AnimalForm(props: {setRender: Dispatch<SetStateAction<bo
         return;}
 
 
-    const html: ReactElement =
+    const FeedbackCloseButton: ReactElement =
+
+        <Fragment>
+
+            <IconButton
+                color="inherit"
+                onClick={(event): void => setFeedback(false)}>
+
+                <CloseIcon />
+
+            </IconButton>
+
+        </Fragment>
+
+    const Html: ReactElement =
 
         <Card
             component="form"
             sx={{
                 marginY: 2,
-                padding: 2}}>
+                padding: 2,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start"}}>
 
             <h1>Enter Animal</h1>
 
@@ -87,6 +106,13 @@ export default function AnimalForm(props: {setRender: Dispatch<SetStateAction<bo
                 required
                 onChange={(event): void => setAnimal({...animal, extinct_since: event.target.value})} />
 
+            <Snackbar
+                open={feedback}
+                autoHideDuration={5000}
+                onClose={(event): void => setFeedback(false)}
+                message="Animal added successfully"
+                action={FeedbackCloseButton} />
+
             <Button
                 variant='contained'
                 endIcon={<AddCircle />}
@@ -97,4 +123,4 @@ export default function AnimalForm(props: {setRender: Dispatch<SetStateAction<bo
 
         </Card>
 
-    return html;}
+    return Html;}
