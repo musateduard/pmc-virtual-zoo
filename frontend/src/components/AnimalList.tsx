@@ -4,10 +4,16 @@ import AnimalItem from "./AnimalItem";
 import { Animal } from "../types";
 
 
-export default function AnimalList(props: {animals: Animal[], setRender: Dispatch<SetStateAction<boolean>>}): ReactElement {
+type AnimalListProps = {
+    animals: Animal[],
+    setRender: Dispatch<SetStateAction<boolean>>,
+    setFeedback: Dispatch<SetStateAction<boolean>>,
+    setFeedbackMessage: Dispatch<SetStateAction<string>>}
+
+
+export default function AnimalList(props: AnimalListProps): ReactElement {
 
     const animals: Animal[] = props.animals;
-    const setRender: Dispatch<SetStateAction<boolean>> = props.setRender;
 
     const Html: ReactElement =
 
@@ -24,11 +30,16 @@ export default function AnimalList(props: {animals: Animal[], setRender: Dispatc
 
                 {animals.length > 0 ?
 
-                    // render list if items present
-                    animals.map((item: any, index: number): ReactElement => <AnimalItem key={index} animalData={item} setRender={setRender} />) :
+                    // render items list if present
+                    animals.map((item: Animal, index: number): ReactElement => <AnimalItem
+                        key={index}
+                        animalData={item}
+                        setFeedback={props.setFeedback}
+                        setFeedbackMessage={props.setFeedbackMessage}
+                        setRender={props.setRender} />) :
 
-                    // display hint if items not present
-                    <h2>no animals</h2>}
+                    // else display hint
+                    <h2>No Animals</h2>}
             </List>
 
         </Card>

@@ -1,11 +1,16 @@
-import { Button, Card, IconButton, InputAdornment, Snackbar, TextField } from "@mui/material";
+import { Button, Card, InputAdornment, TextField } from "@mui/material";
 import { Dispatch, ReactElement, SetStateAction, useState } from "react";
 import { Animal } from "../types";
 import { AddCircle } from "@mui/icons-material";
-import CloseIcon from "@mui/icons-material/Close";
 
 
-export default function AnimalForm(props: {setRender: Dispatch<SetStateAction<boolean>>}): ReactElement {
+type AnimalFormProps = {
+    setRender: Dispatch<SetStateAction<boolean>>,
+    setFeedback: Dispatch<SetStateAction<boolean>>,
+    setFeedbackMessage: Dispatch<SetStateAction<string>>}
+
+
+export default function AnimalForm(props: AnimalFormProps): ReactElement {
 
     const initAnimal: Animal = {
         name: "",
@@ -14,7 +19,6 @@ export default function AnimalForm(props: {setRender: Dispatch<SetStateAction<bo
         extinct_since: ""};
 
     const [animal, setAnimal] = useState<Animal>(initAnimal);
-    const [feedback, setFeedback] = useState<boolean>(false);
 
     // console.log(`AnimalForm feedback: ${feedback}`);
 
@@ -38,8 +42,10 @@ export default function AnimalForm(props: {setRender: Dispatch<SetStateAction<bo
             if (response.status >= 200 && response.status < 300) {
 
                 console.log("animal successfully added");
-                setFeedback(true);
-                setAnimal(initAnimal);}
+                setAnimal(initAnimal);
+                props.setRender(render => !render);
+                props.setFeedbackMessage("Animal successfully added");
+                props.setFeedback(true);}
 
             else {
                 console.log(response.status);}}
@@ -47,20 +53,7 @@ export default function AnimalForm(props: {setRender: Dispatch<SetStateAction<bo
         catch (error) {
             console.log(error);}
 
-        props.setRender(render => !render);
-
         return;}
-
-
-    const FeedbackCloseButton: ReactElement =
-
-        <IconButton
-            color="inherit"
-            onClick={(event): void => setFeedback(false)}>
-
-            <CloseIcon />
-
-        </IconButton>
 
 
     const Html: ReactElement =
@@ -119,15 +112,6 @@ export default function AnimalForm(props: {setRender: Dispatch<SetStateAction<bo
                 required
                 value={animal.extinct_since}
                 onChange={(event): void => setAnimal({...animal, extinct_since: event.target.value})} />
-
-            <Snackbar
-                // todo: move snackbar to parent component
-                open={feedback}
-                autoHideDuration={5000}
-                onClose={(event, reason): void => setFeedback(false)}
-                ClickAwayListenerProps={{onClickAway: (event): null => null}}
-                message="Animal successfully added"
-                action={FeedbackCloseButton} />
 
             <Button
                 variant='contained'

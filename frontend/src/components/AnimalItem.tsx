@@ -1,15 +1,17 @@
-import { Box, Button, IconButton, Snackbar } from "@mui/material";
-import { Dispatch, ReactElement, SetStateAction, useState } from "react";
+import { Box, Button } from "@mui/material";
+import { Dispatch, ReactElement, SetStateAction } from "react";
 import { Animal } from "../types";
 import { Delete } from "@mui/icons-material";
-import CloseIcon from "@mui/icons-material/Close";
 
 
-export default function AnimalItem(props: {animalData: Animal, setRender: Dispatch<SetStateAction<boolean>>}): ReactElement {
+type AnimalItemProps = {
+    animalData: Animal,
+    setRender: Dispatch<SetStateAction<boolean>>,
+    setFeedback: Dispatch<SetStateAction<boolean>>,
+    setFeedbackMessage: Dispatch<SetStateAction<string>>}
 
-    const [deleteFeedback, setDeleteFeedback] = useState<boolean>(false);
 
-    console.log(`AnimalItem feedback: ${deleteFeedback}`);
+export default function AnimalItem(props: AnimalItemProps): ReactElement {
 
 
     const deleteAnimal: Function = async function(animalData: Animal): Promise<void> {
@@ -30,7 +32,9 @@ export default function AnimalItem(props: {animalData: Animal, setRender: Dispat
 
             if (response.status >= 200 && response.status < 300) {
                 console.log("animal successfully deleted");
-                setDeleteFeedback(true);}
+                props.setRender(render => !render);
+                props.setFeedbackMessage("Animal successfully deleted");
+                props.setFeedback(true);}
 
             else {
                 console.log(response.status);}}
@@ -38,20 +42,7 @@ export default function AnimalItem(props: {animalData: Animal, setRender: Dispat
         catch (error) {
             console.log(error);}
 
-        props.setRender(render => !render);
-
         return;}
-
-
-    const FeedbackCloseButton: ReactElement =
-
-        <IconButton
-            color="inherit"
-            onClick={(event): void => setDeleteFeedback(false)}>
-
-            <CloseIcon />
-
-        </IconButton>
 
 
     const Html: ReactElement =
@@ -73,15 +64,6 @@ export default function AnimalItem(props: {animalData: Animal, setRender: Dispat
 
                 {props.animalData.name}
             </h2>
-
-            <Snackbar
-                // todo: move snackbar to parent component
-                open={deleteFeedback}
-                autoHideDuration={5000}
-                onClose={(event, reason): void => setDeleteFeedback(false)}
-                ClickAwayListenerProps={{onClickAway: (event): null => null}}
-                message="Animal successfully removed"
-                action={FeedbackCloseButton} />
 
             <Button
                 variant='contained'
