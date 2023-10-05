@@ -1,17 +1,22 @@
 import './App.css';
-import { Container } from '@mui/material';
+import { Container, IconButton, Snackbar } from '@mui/material';
 import { ReactElement, useEffect, useState } from 'react';
 import { Animal } from './types';
 import AnimalForm from './components/AnimalForm';
 import AnimalList from './components/AnimalList';
+import CloseIcon from "@mui/icons-material/Close";
 
 
 export default function App(): ReactElement {
 
+    // state properties
     const [animals, setAnimals] = useState<Animal[]>([]);
     const [render, setRender] = useState<boolean>(false);
+    const [feedbackMessage, setFeedbackMessage] = useState<string>("");
+    const [feedback, setFeedback] = useState<boolean>(false);
 
 
+    /** function used to fetch animal data from backend */
     const getAnimals: Function = async function(controller: AbortController): Promise<void> {
 
         try {
@@ -32,10 +37,22 @@ export default function App(): ReactElement {
         () => {
             const controller: AbortController = new AbortController();
             getAnimals(controller);
-            return (): void => {controller.abort()};},
+            return (): void => controller.abort()},
 
-        // dependency array
+        // render every time render state changes
         [render]);
+
+
+    /** close component for the snackbar close button */
+    const FeedbackCloseButton: ReactElement =
+
+        <IconButton
+            color="inherit"
+            onClick={(event): void => setFeedback(false)}>
+
+            <CloseIcon />
+
+        </IconButton>
 
 
     const Html: ReactElement =
@@ -47,11 +64,19 @@ export default function App(): ReactElement {
 
                 <h1>Virtual Zoo</h1>
 
+                <Snackbar
+                    open={feedback}
+                    autoHideDuration={5000}
+                    onClose={(event, reason): void => setFeedback(false)}
+                    ClickAwayListenerProps={{onClickAway: (event): null => null}}
+                    message={feedbackMessage}
+                    action={FeedbackCloseButton} />
+
                 {/* animal list component */}
-                <AnimalList animals={animals} setRender={setRender} />
+                <AnimalList animals={animals} setRender={setRender} setFeedback={setFeedback} setFeedbackMessage={setFeedbackMessage} />
 
                 {/* add animal form */}
-                <AnimalForm setRender={setRender} />
+                <AnimalForm setRender={setRender} setFeedback={setFeedback} setFeedbackMessage={setFeedbackMessage} />
 
             </Container>
 
