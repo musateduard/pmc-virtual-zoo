@@ -1,13 +1,62 @@
 version: "3.8"
 
+
+volumes:
+
+  db_data:
+
+
+secrets:
+
+  .pg_service.conf:
+    file: ${HOME}/.pg_service.conf
+
+
 services:
 
+  database:
+    image: postgres:16.0-bookworm
+    container_name: pmc-database
+    init: true
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
   backend:
-    build: ./backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     image: pmc-backend
     container_name: pmc-backend
     init: true
+    depends_on:
+      - database
+    secrets:
+      - .pg_service.conf
+    environment:
+      - PGSERVICEFILE=/run/secrets/.pg_service.conf
     ports:
       - 8000:8000
 
-# volumes:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: pmc-frontend
+    container_name: pmc-frontend
+    depends_on:
+      - database
+      - backend
+    init: true
+    ports:
+      - 3000:3000
+
+  server:
+    image: nginx:1.25.2-bookworm
+    container_name: pmc-server
+    depends_on:
+      - database
+      - backend
+      - frontend
+    init: true
+    ports:
+      - 80:80
