@@ -20,6 +20,7 @@ export default function App(): ReactElement {
     const getAnimals: Function = async function(controller: AbortController): Promise<void> {
 
         try {
+            // note: localhost gets automatically redirected inside container
             const response: Response = await fetch("http://localhost:8000/animals/", {signal: controller.signal});
             const data: Animal[] = await response.json();
 
