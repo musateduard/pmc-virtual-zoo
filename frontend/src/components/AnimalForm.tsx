@@ -12,17 +12,18 @@ type AnimalFormProps = {
 
 export default function AnimalForm(props: AnimalFormProps): ReactElement {
 
+    // animal init values
     const initAnimal: Animal = {
         name: "",
         weight: "",
         superpower: "",
         extinct_since: ""};
 
+    // animal state
     const [animal, setAnimal] = useState<Animal>(initAnimal);
 
-    // console.log(`AnimalForm feedback: ${feedback}`);
 
-
+    /** function that makes post request to create animal entry */
     const createAnimal: Function = async function(animalData: Animal): Promise<void> {
 
         try {
@@ -30,7 +31,7 @@ export default function AnimalForm(props: AnimalFormProps): ReactElement {
 
             const response: Response = await fetch(
 
-                // fetch url
+                // request url
                 "http://localhost:8000/animals/", {
 
                 // request data
@@ -56,6 +57,7 @@ export default function AnimalForm(props: AnimalFormProps): ReactElement {
         return;}
 
 
+    // rendered component
     const Html: ReactElement =
 
         <Card

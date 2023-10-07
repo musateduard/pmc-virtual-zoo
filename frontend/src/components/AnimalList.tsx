@@ -15,6 +15,7 @@ export default function AnimalList(props: AnimalListProps): ReactElement {
 
     const animals: Animal[] = props.animals;
 
+    // rendered component
     const Html: ReactElement =
 
         <Card

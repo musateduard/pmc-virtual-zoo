@@ -14,6 +14,7 @@ type AnimalItemProps = {
 export default function AnimalItem(props: AnimalItemProps): ReactElement {
 
 
+    /** function that sends delete request to remove animal entry */
     const deleteAnimal: Function = async function(animalData: Animal): Promise<void> {
 
         console.log(`deleting animal ${animalData.id} ${animalData.name}`);
@@ -24,7 +25,7 @@ export default function AnimalItem(props: AnimalItemProps): ReactElement {
 
             const response: Response = await fetch(
 
-                // fetch url
+                // request url
                 `http://localhost:8000/animals/${animalData.id}/`, {
 
                 // request data
@@ -45,6 +46,7 @@ export default function AnimalItem(props: AnimalItemProps): ReactElement {
         return;}
 
 
+    // rendered component
     const Html: ReactElement =
 
         <Box

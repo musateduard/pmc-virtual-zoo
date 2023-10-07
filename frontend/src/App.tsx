@@ -21,7 +21,14 @@ export default function App(): ReactElement {
 
         try {
             // note: localhost gets automatically redirected inside container
-            const response: Response = await fetch("/animals/", {signal: controller.signal});
+            const response: Response = await fetch(
+
+                // request url
+                "http://localhost:8000/animals/", {
+
+                // request data
+                signal: controller.signal});
+
             const data: Animal[] = await response.json();
 
             setAnimals(data);}
@@ -56,6 +63,7 @@ export default function App(): ReactElement {
         </IconButton>
 
 
+    // rendered component
     const Html: ReactElement =
 
             <Container
