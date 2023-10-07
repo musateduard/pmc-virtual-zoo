@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -14,12 +15,16 @@ SECRET_KEY = 'django-insecure-l2t3$ne-fl4ng4whkoy-)bfp=y)ut^f$1hw_l82a)dcv_$ms!7
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "localhost"
+    "localhost",
+    "pmc-backend"
 ]
 
-CORS_ORIGIN_WHITELIST = [
-     'http://localhost:3000'
-]
+# CORS_ORIGIN_WHITELIST = [
+#      'http://localhost:3000',
+#      "http://pmc-frontend:8000",
+# ]
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
 
@@ -37,6 +42,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -44,8 +51,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
-    "corsheaders.middleware.CorsMiddleware"
 ]
 
 ROOT_URLCONF = 'main.urls'
@@ -76,8 +81,14 @@ DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.postgresql",
         "OPTIONS": {
-            # "service": "pmc_zoo_host",  # for host
-            "service": "pmc_zoo_docker",  # for docker
+
+            # for host
+            "service": "pmc_zoo_host",  # for host
+            "passfile": f"{os.environ['HOME']}/.pgpass"
+
+            # for docker
+            # "service": "pmc_zoo_docker",
+            # "passfile": "/run/secrets/.pgpass"
         }
     }
 }
