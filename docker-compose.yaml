@@ -11,6 +11,9 @@ secrets:
   .pg_service.conf:
     file: ${HOME}/.pg_service.conf
 
+  .pgpass:
+    file: ${HOME}/.pgpass
+
 
 services:
 
@@ -32,8 +35,10 @@ services:
       - database
     secrets:
       - .pg_service.conf
+      - .pgpass
     environment:
       - PGSERVICEFILE=/run/secrets/.pg_service.conf
+      - PGPASSFILE=/run/secrets/.pgpass
     ports:
       - 8000:8000
 
