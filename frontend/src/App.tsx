@@ -21,7 +21,7 @@ export default function App(): ReactElement {
 
         try {
             // note: localhost gets automatically redirected inside container
-            const response: Response = await fetch("http://localhost:8000/animals/", {signal: controller.signal});
+            const response: Response = await fetch("/animals/", {signal: controller.signal});
             const data: Animal[] = await response.json();
 
             setAnimals(data);}
