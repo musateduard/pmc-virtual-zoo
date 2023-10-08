@@ -1,13 +1,8 @@
 import { Button, Card, InputAdornment, TextField } from "@mui/material";
-import { Dispatch, ReactElement, SetStateAction, useState } from "react";
+import { ReactElement, useState } from "react";
 import { Animal } from "../types";
 import { AddCircle } from "@mui/icons-material";
-
-
-type AnimalFormProps = {
-    setRender: Dispatch<SetStateAction<boolean>>,
-    setFeedback: Dispatch<SetStateAction<boolean>>,
-    setFeedbackMessage: Dispatch<SetStateAction<string>>}
+import { AnimalFormProps } from "../types";
 
 
 export default function AnimalForm(props: AnimalFormProps): ReactElement {

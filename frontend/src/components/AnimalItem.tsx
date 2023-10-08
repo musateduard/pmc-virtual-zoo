@@ -1,14 +1,8 @@
 import { Box, Button } from "@mui/material";
-import { Dispatch, ReactElement, SetStateAction } from "react";
+import { ReactElement } from "react";
 import { Animal } from "../types";
 import { Delete } from "@mui/icons-material";
-
-
-type AnimalItemProps = {
-    animalData: Animal,
-    setRender: Dispatch<SetStateAction<boolean>>,
-    setFeedback: Dispatch<SetStateAction<boolean>>,
-    setFeedbackMessage: Dispatch<SetStateAction<string>>}
+import { AnimalItemProps } from "../types";
 
 
 export default function AnimalItem(props: AnimalItemProps): ReactElement {
