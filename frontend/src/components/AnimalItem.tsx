@@ -50,22 +50,30 @@ export default function AnimalItem(props: AnimalItemProps): ReactElement {
     const Html: ReactElement =
 
         <Box
-            key={22}
             component="li"
             sx={{
                 display: "flex",
                 justifyContent: "space-between",
+                alignItems: "flex-start",
                 marginY: 1}}>
 
-            <h2
-                style={{
-                    marginBlock: 0,
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center"}}>
+            <Box>
 
-                {props.animalData.name}
-            </h2>
+                <h2
+                    style={{
+                        marginBlock: 0,
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center"}}>
+
+                    {props.animalData.name}
+                </h2>
+
+                <p>Weight: {props.animalData.weight}</p>
+                <p>Superpower: {props.animalData.superpower}</p>
+                <p>Extinct: {props.animalData.extinct_since}</p>
+
+            </Box>
 
             <Button
                 variant='contained'
