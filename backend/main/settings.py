@@ -16,7 +16,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "localhost",
-    "pmc-backend"
+    "pmc-backend",
+    "host.docker.internal",
 ]
 
 # CORS_ORIGIN_WHITELIST = [
