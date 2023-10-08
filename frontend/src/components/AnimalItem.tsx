@@ -1,7 +1,7 @@
 import { Box, Button } from "@mui/material";
 import { ReactElement } from "react";
 import { Animal } from "../types";
-import { Delete } from "@mui/icons-material";
+import { Delete, Edit } from "@mui/icons-material";
 import { AnimalItemProps } from "../types";
 
 
@@ -48,7 +48,7 @@ export default function AnimalItem(props: AnimalItemProps): ReactElement {
             sx={{
                 display: "flex",
                 justifyContent: "space-between",
-                alignItems: "flex-start",
+                alignItems: "stretch",
                 marginY: 1}}>
 
             <Box>
@@ -69,14 +69,30 @@ export default function AnimalItem(props: AnimalItemProps): ReactElement {
 
             </Box>
 
-            <Button
-                variant='contained'
-                size='small'
-                endIcon={<Delete />}
-                onClick={(event): void => deleteAnimal(props.animalData)}>
+            <Box
+                sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-evenly"}}>
 
-                remove
-            </Button>
+                <Button
+                    variant='contained'
+                    endIcon={<Delete />}
+                    onClick={(event): void => deleteAnimal(props.animalData)}>
+
+                    Delete
+                </Button>
+
+                <Button
+                    variant="contained"
+                    endIcon={<Edit />}>
+
+                    Edit
+                </Button>
+
+            </Box>
+
+
 
         </Box>
 
