@@ -48,20 +48,24 @@ services:
       dockerfile: Dockerfile
     image: pmc-frontend
     container_name: pmc-frontend
+    init: true
     depends_on:
       - database
       - backend
-    init: true
     ports:
       - 3000:3000
 
   server:
-    image: nginx:1.25.2-bookworm
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    image: pmc-server
     container_name: pmc-server
+    init: true
     depends_on:
       - database
       - backend
       - frontend
-    init: true
     ports:
       - 80:80
+      - 5000:5000
