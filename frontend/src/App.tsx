@@ -9,6 +9,8 @@ import CloseIcon from "@mui/icons-material/Close";
 
 export default function App(): ReactElement {
 
+    console.log(`REACT_APP_API_URL: ${process.env.REACT_APP_API_URL}`);
+
     // state properties
     const [animals, setAnimals] = useState<Animal[]>([]);
     const [render, setRender] = useState<boolean>(false);
@@ -20,11 +22,10 @@ export default function App(): ReactElement {
     const getAnimals: Function = async function(controller: AbortController): Promise<void> {
 
         try {
-            // note: localhost gets automatically redirected inside container
             const response: Response = await fetch(
 
                 // request url
-                "http://localhost:8000/animals/", {
+                `${process.env.REACT_APP_API_URL}animals/`, {
 
                 // request data
                 signal: controller.signal});

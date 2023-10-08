@@ -21,12 +21,12 @@ export default function AnimalItem(props: AnimalItemProps): ReactElement {
 
         try {
             console.log(JSON.stringify(animalData));
-            console.log(`http://localhost:8000/animals/${animalData.id}/`);
+            console.log(`${process.env.REACT_APP_API_URL}animals/${animalData.id}/`);
 
             const response: Response = await fetch(
 
                 // request url
-                `http://localhost:8000/animals/${animalData.id}/`, {
+                `${process.env.REACT_APP_API_URL}animals/${animalData.id}/`, {
 
                 // request data
                 method: "DELETE"});
