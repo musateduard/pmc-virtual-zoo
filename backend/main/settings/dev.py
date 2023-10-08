@@ -10,6 +10,8 @@ ALLOWED_HOSTS = [
     "host.docker.internal",
 ]
 
+CORS_ALLOW_ALL_ORIGINS = True
+
 DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.postgresql",
