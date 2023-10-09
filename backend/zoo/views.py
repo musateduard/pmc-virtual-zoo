@@ -21,7 +21,7 @@ class TestViewSet(ModelViewSet):
 class AnimalViewSet(ModelViewSet):
 
     serializer_class: type = AnimalSerializer
-    queryset: QuerySet[Animal] = Animal.objects.all()
+    queryset: QuerySet[Animal] = Animal.objects.all().order_by("id")
 
 
     def create(self, request: Request, *args: Any, **kwargs: Any):
