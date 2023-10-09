@@ -25,7 +25,7 @@ export default function App(): ReactElement {
             const response: Response = await fetch(
 
                 // request url
-                `${process.env.REACT_APP_API_URL}animals/`, {
+                `${process.env.REACT_APP_API_URL}/animals/`, {
 
                 // request data
                 signal: controller.signal});
