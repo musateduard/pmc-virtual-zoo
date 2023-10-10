@@ -5,11 +5,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     "localhost",
-    "pmc-backend",
-    "host.docker.internal",
+    "backend.local",
 ]
-
-CORS_ALLOW_ALL_ORIGINS = True
 
 DATABASES = {
     'default': {
