@@ -9,5 +9,5 @@ COPY . .
 
 EXPOSE 8000
 
-ENTRYPOINT ["hypercorn"]
+ENTRYPOINT ["gunicorn"]
 CMD ["--bind", "0.0.0.0:8000", "main.wsgi:application"]
