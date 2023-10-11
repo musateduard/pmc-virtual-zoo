@@ -19,10 +19,14 @@ export default function AnimalList(props: AnimalListProps): ReactElement {
     const Html: ReactElement =
 
         <Card
+            className="glass"
             component="section"
             sx={{
                 marginY: 2,
-                padding: 2}}>
+                padding: 2,
+                background: "rgba(255, 255, 255, 0.4)",
+                border: "1px solid rgba(255, 255, 255, 0.3)",
+                backdropFilter: "blur(5px)",}}>
 
             <h2 style={{margin: 0}}>Animal List</h2>
 

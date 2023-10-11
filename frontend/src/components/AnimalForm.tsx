@@ -62,7 +62,10 @@ export default function AnimalForm(props: AnimalFormProps): ReactElement {
                 padding: 2,
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "flex-start"}}>
+                alignItems: "flex-start",
+                background: "rgba(255, 255, 255, 0.4)",
+                border: "1px solid rgba(255, 255, 255, 0.3)",
+                backdropFilter: "blur(5px)",}}>
 
             <h2>Animal Form</h2>
             <p>Enter Animal Data:</p>

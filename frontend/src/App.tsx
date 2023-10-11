@@ -1,4 +1,3 @@
-import './App.css';
 import { Container, IconButton, Snackbar } from '@mui/material';
 import { ReactElement, useEffect, useState } from 'react';
 import { Animal } from './types';
